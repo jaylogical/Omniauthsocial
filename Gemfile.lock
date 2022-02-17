@@ -315,6 +315,7 @@ DEPENDENCIES
   devise
   jbuilder (~> 2.7)
   listen (~> 3.2)
+  mail
   omniauth
   omniauth-discord
   omniauth-facebook

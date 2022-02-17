@@ -24,7 +24,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  config.mailer_sender = 'info@jaykava.io'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -275,15 +275,24 @@ Devise.setup do |config|
 
   config.omniauth :google_oauth2, Rails.application.credentials[:google][:google_api_key], Rails.application.credentials[:google][:google_api_secret], {}
 
-  config.omniauth :facebook, Rails.application.credentials[:facebook][:facebook_api_key], Rails.application.credentials[:facebook][:facebook_api_secret], {}
+  config.omniauth :facebook, Rails.application.credentials[:facebook][:facebook_api_key], Rails.application.credentials[:facebook][:facebook_api_secret], {:scope => 'email,offline_access',
+    :strategy_class => OmniAuth::Strategies::Facebook}
 
-  config.omniauth :github, Rails.application.credentials[:github][:github_api_key], Rails.application.credentials[:github][:github_api_secret], {}
+  config.omniauth :github, Rails.application.credentials[:github][:github_api_key], Rails.application.credentials[:github][:github_api_secret], scope: %w(
+    email
+  ).join(' ')
 
-  config.omniauth :linkedin, Rails.application.credentials[:linkedin][:linkedin_api_key], Rails.application.credentials[:linkedin][:linkedin_api_secret], {}
+  config.omniauth :linkedin, Rails.application.credentials[:linkedin][:linkedin_api_key], Rails.application.credentials[:linkedin][:linkedin_api_secret], scope: %w(
+    r_emailaddress
+    r_liteprofile
+  ).join(' ')
 
   config.omniauth :discord, Rails.application.credentials[:discord][:discord_api_key], Rails.application.credentials[:discord][:discord_api_secret], {}
 
-  config.omniauth :twitter, Rails.application.credentials[:twitter][:twitter_api_key], Rails.application.credentials[:twitter][:twitter_api_secret], {}
+  config.omniauth :twitter, Rails.application.credentials[:twitter][:twitter_api_key], Rails.application.credentials[:twitter][:twitter_api_secret],
+  scope: %w(
+    
+  ).join(' ')
 
   config.omniauth :spotify, Rails.application.credentials[:spotify][:spotify_api_key], Rails.application.credentials[:spotify][:spotify_api_secret], scope: %w(
     playlist-read-private
